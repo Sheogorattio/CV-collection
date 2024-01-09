@@ -6,37 +6,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CV_collection"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        fw:AcrylicWindow.Enabled="True" 
+        Title="MainWindow" Height="450" Width="800" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ViewModels:MainViewModel x:Key="MainVM"/>
+
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#FFE9E9E9" />
+            <Setter Property="Foreground" Value="#FF182727" />
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                             <ScrollViewer Margin="4" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#182727" />
+            <Setter Property="Foreground" Value="#d5dddf" />
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#d5dddf" />
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="Foreground" Value="#182727"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Margin" Value="3"/>
+        </Style>
     </Window.Resources>
-    <Grid DataContext="{StaticResource MainVM}">
+    <Grid DataContext="{StaticResource MainVM}" >
+        <Grid fw:AcrylicWindow.Enabled="True" Opacity="0.7" Margin="-10,-11,-10,-11" >
+            <Grid.Background>
+                <ImageBrush ImageSource="/Img/bg.png"/>
+            </Grid.Background>
+        </Grid>
         <StackPanel Width="300" Margin="10">
-            <TextBlock Text="Name"/>
-            <TextBox Text="{Binding CurrentName}"/>
+            <TextBlock Text="Name" FontWeight="DemiBold"/>
+            <TextBox Text="{Binding CurrentName}" BorderBrush="#FF192827"/>
 
-            <TextBlock Text="Age"/>
-            <TextBox Text="{Binding CurrentAge}"/>
+            <TextBlock Text="Age" FontWeight="DemiBold"/>
+            <TextBox Text="{Binding CurrentAge}" BorderBrush="#FF192827"/>
 
-            <TextBlock Text="Marital status"/>
-            <TextBox Text="{Binding CurrentMartialStatus}"/>
+            <TextBlock Text="Marital status" FontWeight="DemiBold"/>
+            <TextBox Text="{Binding CurrentMartialStatus}" BorderBrush="#FF192827"/>
 
             <TextBlock Text="Address"/>
-            <TextBox Text="{Binding CurrentAddress}"/>
+            <TextBox Text="{Binding CurrentAddress}" BorderBrush="#FF192827"/>
 
-            <WrapPanel>
-                <CheckBox Content="English" IsChecked="{Binding IsEnglish}"/>
-                <CheckBox Content="Java" IsChecked="{Binding IsJava}"/>
-                <CheckBox Content="C++" IsChecked="{Binding IsCPlusPlus}"/>
-                <CheckBox Content="C#" IsChecked="{Binding IsCSharp}"/>
+            <WrapPanel VerticalAlignment="Center">
+                <CheckBox Content="English" IsChecked="{Binding IsEnglish}" FontFamily="Trebuchet MS" Foreground="#FF192827" FontWeight="Bold" Margin="5,5,0,5"/>
+                <CheckBox Content="Java" IsChecked="{Binding IsJava}" FontFamily="Trebuchet MS" Foreground="#FF182727" FontWeight="Bold" Margin="5,5,0,5"/>
+                <CheckBox Content="C++" IsChecked="{Binding IsCPlusPlus}" FontFamily="Trebuchet MS" Foreground="#FF182727" FontWeight="Bold" Margin="5,5,0,5"/>
+                <CheckBox Content="C#" IsChecked="{Binding IsCSharp}" Foreground="#FF182727" FontFamily="Trebuchet MS" FontWeight="Bold" Margin="5,5,0,5"/>
             </WrapPanel>
 
-            <Button Content="Save" Command="{Binding SaveCommand}"/>
-            <Button Content="Clear" Command="{Binding ClearCommand}"/>
+            <Button Content="Save" Command="{Binding SaveCommand}" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="14">
+                <Button.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF253830"/>
+                        <GradientStop Color="#FF182727" Offset="1"/>
+                    </RadialGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Clear"  FontFamily="Trebuchet MS" Background="#FF3C5148" FontSize="14" Command="{Binding ClearCommand}"/>
 
-            <ComboBox ItemsSource="{Binding Names}" SelectedItem="{Binding SelectedSummaryItem}"/>
+            <ComboBox ItemsSource="{Binding Names}" SelectedItem="{Binding SelectedSummaryItem}" SelectedIndex="0" Margin="0,5,0,5" Background="{x:Null}" FontFamily="Trebuchet MS" BorderBrush="{x:Null}" Foreground="Black"/>
 
-            <Button Content="Show info" Command="{Binding ShowCommand}"/>
+            <Button Content="Show info" Command="{Binding ShowCommand}" Background="#FF3C5148" FontFamily="Trebuchet MS" FontSize="14"/>
         </StackPanel>
     </Grid>
 </Window>
